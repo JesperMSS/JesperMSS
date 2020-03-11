@@ -61,3 +61,12 @@ on Projekt.Projchef = AnsID;
 #attribut. (2p)
 select count(Lön) from Anställd;
 
+#. Skriv en SQL-fråga som skapar en Vy bestående av attribut från 2..n olika tabeller. Du skall inte
+#återanvända kod från tidigare svar. (2p)
+create view Chef (Avdschef, Projchef)
+as select Avdelning.AvdChef as avdschef,
+          Projekt.Projchef as projchef
+from Avdelning, Projekt;
+
+drop view Chef;
+
