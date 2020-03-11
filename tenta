@@ -1,0 +1,63 @@
+use Tentajävel;
+
+# Skriv en SQL-fråga som listar alla attribut från en relation i resultatsetet. (1p)
+select * from Anställd;
+
+#Skriv en SQL-fråga som listar ut ett begränsat antal attribut och ett begränsat antal tupler
+# baserat på ett kriterium du väljer från en relation i resultatsetet. (2p)
+select AnsID, Adress, Telefon from Anställd
+limit 1,1;
+
+#Skriv en SQL-fråga som listar begränsat antal attribut från en relation där värdet i ett valt
+#attribut ska vara NULL alt. Inte ska vara NULL (1p)
+select Förnamn from Anställd
+where Förnamn is not null;
+
+#Skriv en SQL-fråga som lista alla attribut från en relation där du använder nyckelordet för
+#Wildcard (exempel av wildcard nyckelordet: *, %, ?, !, #, etc.) (2p)
+select Förnamn from Anställd
+where Förnamn like 'J%';
+
+#Skriv en SQL-fråga som listar alla attribut från en relation i sorterade efter högsta/första värdet
+#alt. Lägsta/sista värdet. (1p)
+select * from Anställd
+order by Lön asc;
+
+#Skriv en SQL-fråga som listar begränsat antal attribut från en relation där du använder annan
+#logisk operand än = för att välja vilka tupler som skall tas med i resultatsetet. (1p)
+select Förnamn from Anställd
+where Lön > '100';
+
+#Skriv en SQL-fråga där du använder kartesisk produkt för att slå samman 2..n antal tabeller för
+#att hämta ut några attributen. Ändra även namnet på några av attributnamnet i resultatsetet.
+#(2p) <- Hur gör man detta i ett steg?
+select * from Anställd, Avdelning;
+alter table Anställd
+change Förnamn Firstname varchar(25);
+alter table Anställd
+change Firstname Förnamn varchar(25);
+
+#Skriv en sammankopplad/relaterad SQL-fråga som använder nyckelordet IN. (2p)
+select * from Anställd
+where AnsID in (select AnsID from Deltar_i_projekt);
+
+#Skriv en SQL-fråga som slår samman 3..n tabeller med hjälp av nyckelordet JOIN. (1p) ENDAST MED TVÅ TABELLER!!!!!!
+select * from Artiklar
+inner join Antal_artiklar_i_lager
+on Artiklar.ArtID = Antal_artiklar_i_lager.ArtID;
+
+#Skriv en SQL-fråga som slår samman 3..n tabeller med hjälp av nyckelordet JOIN. (1p) Tre tabeller
+select * from Anställd
+inner join Avdelning
+on Anställd.AnsID = Avdelning.AvdChef
+inner join Projekt
+on Projekt.Projchef = AnsID;
+
+#Skriven en SQL-fråga där du joinar 2…n tabeller där du visar medelvärdet (AVG) av ett antal
+#värden. Resultatsetet skall grupperas efter 1..n attribut och enbart en delmängd av tuplera ska
+#visas. (3p) fattar ej frågan
+
+#Skriv en SQL-fråga där du räknar antalet tupler och listar detta antal grupperat på ett visst
+#attribut. (2p)
+select count(Lön) from Anställd;
+
