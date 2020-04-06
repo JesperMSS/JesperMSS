@@ -1,3 +1,92 @@
+--------------------------------------------------------NYA KODEN-----------------------------------------
+import java.util.ArrayList;
+
+public class SuperHjalte
+{
+    //Fält
+    private ArrayList<SuperVapen> vapenRegister;
+    private String Namn;
+    private String Stad;
+  
+    //Konstruktor
+    public SuperHjalte(String hjalteNamn, String hjalteStad)
+    {
+        vapenRegister = new ArrayList<SuperVapen>();
+        Namn = hjalteNamn;
+        Stad = hjalteStad;
+    }
+
+    //1
+    public void laggTillSuperVapen(SuperVapen p_hjalteSuperVapen)
+    {    
+        boolean isfound = false;
+        for(SuperVapen vapen : vapenRegister) {
+            if (vapen.getNamn().equals(p_hjalteSuperVapen.getNamn())){
+                isfound=true;
+            }
+        }
+        
+        if (isfound==true) {
+            System.out.println("Superhjälten har redan ett supervapen med namnet:" + p_hjalteSuperVapen.getNamn());
+        } 
+
+        else{
+            vapenRegister.add(p_hjalteSuperVapen);
+            System.out.println("Ett nytt supervapen har registreras för superhjälten");
+        }
+    }
+
+    //2
+    public void superHjalteInfo()
+    {
+        System.out.println("Superhjälten " + Namn + " vakar över staden " + Stad);
+        System.out.println("Hjältens supervapen:");
+        for(SuperVapen vapen : vapenRegister)
+        {
+            System.out.println(vapen.getNamn()+ " antal laddningar " + vapen.getAntalLaddningar());
+        }
+    }
+
+    //3
+    public void skjutVapen(String superVapen, int antalSkottManVillSkjuta)
+        {
+        int antalSkott; 
+        for(SuperVapen vapen : vapenRegister) {
+            if(vapen.getNamn().equals(superVapen)){
+            antalSkott = vapen.getAntalLaddningar();
+                    if(antalSkott>=antalSkottManVillSkjuta){
+            for(int i=0; i<antalSkottManVillSkjuta; i++){                
+                    vapen.anvandSuperVapen();
+                        }
+            System.out.println("Supervapen har använts och det finns nu " + (vapen.getAntalLaddningar()) + " ammo kvar.");
+                    }
+                    else {
+                        System.out.println("Det fanns inte tillräckligt med laddningar kvar, försök med ett annat supervapen istället");
+                    }
+           }    
+           }
+        }
+    
+    //4
+    public int superHjalteAmmo()
+    {
+        int totalAmmo = 0; 
+        for(SuperVapen vapen : vapenRegister) {
+
+            totalAmmo += vapen.getAntalLaddningar();
+
+        }
+        return totalAmmo;
+    }
+
+    //5
+    public void textSuperHjalteAmmo()
+    {
+        System.out.println("Hjälten " + Namn + " har " + superHjalteAmmo() + " laddningar kvar!"); 
+    }
+}
+
+
 --------------------------------------------Första koden-------------------------------------------------------------------
 public class SuperVapen
 {
